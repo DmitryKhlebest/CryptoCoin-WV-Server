@@ -1,0 +1,17 @@
+{
+	"defaultEnv": "dev",
+	"live": {
+		"driver": "pg",
+		"user": "crypto_coin_wv",
+		"password": "crypto_coin_wv",
+		"host": "localhost",
+		"database": "crypto_coin_wv"
+	},
+	"dev": {
+		"driver": "pg",
+		"user": "crypto_coin_wv",
+		"password": "crypto_coin_wv",
+		"host": "localhost",
+		"database": "crypto_coin_wv"
+	}
+}

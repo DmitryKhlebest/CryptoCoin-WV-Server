@@ -1,0 +1,23 @@
+{
+  "name": "server-crypto-coin-wv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate:up": "node ./node_modules/db-migrate/bin/db-migrate up --config ./config/migrate.json -e live --migrations-dir='./migrations'",
+    "migrate:down": "node ./node_modules/db-migrate/bin/db-migrate down --config ./config/migrate.json -e live --migrations-dir='./migrations' --count 1"
+  },
+  "author": "KDA",
+  "license": "ISC",
+  "dependencies": {
+    "db-migrate": "^0.11.4",
+    "db-migrate-pg": "^0.4.0",
+    "nodemon": "^1.18.9",
+    "pg": "^7.6.0",
+    "redis": "^2.8.0",
+    "request": "^2.88.0",
+    "ws": "^6.1.2"
+  }
+}
