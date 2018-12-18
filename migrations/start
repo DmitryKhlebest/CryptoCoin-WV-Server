@@ -1,13 +1,13 @@
 #!/bin/bash
 
 echo "---> PREPARATION FOR MIGRATION"
-sudo -u postgres -H -- psql -d postgres -c "CREATE DATABASE crypto_coin_wv WITH OWNER crypto_coin_wv"
 sudo -u postgres -H -- psql -d postgres -c "CREATE USER crypto_coin_wv WITH PASSWORD 'crypto_coin_wv' CREATEDB "
+sudo -u postgres -H -- psql -d postgres -c "CREATE DATABASE crypto_coin_wv WITH OWNER crypto_coin_wv"
 echo "---> COMPLETED"
 
 echo ""
 echo ""
 
 echo "---> MIGRATION"
-node ../node_modules/db-migrate/bin/db-migrate up --config ../config/server.migrate.json -e live --migrations-dir='.'
+node ../node_modules/db-migrate/bin/db-migrate up --config ../config/migrate.json -e live --migrations-dir='.'
 echo "---> COMPLETED"
