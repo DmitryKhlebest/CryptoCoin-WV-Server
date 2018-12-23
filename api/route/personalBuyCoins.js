@@ -9,9 +9,9 @@ const SYSTEM_ADMIN_ID = 1;
 
 
 const personalBuyCoins = async (data) => {
-	// const { coins, userId } = data;
-	const { coins } = data;
-	const userId = 2;
+	const { coins, userId } = data;
+	// const { coins } = data;
+	// const userId = 2;
 
 	const user = await User.getUserById(userId);
 	let balance = user.balance;
@@ -25,7 +25,10 @@ const personalBuyCoins = async (data) => {
 
 	const totalPrice = Number(coins
 		.reduce((sum, coin) => {
-			sum += objectCoinsWithPrice[coin.id] * coin.quantity;
+			const price = objectCoinsWithPrice[coin.id] * coin.quantity;
+			sum += (price > 0 && price < 0.01) 
+				? 0.01
+				: price;
 			return sum;
 		}, 0)
 		.toFixed(2));
@@ -45,6 +48,8 @@ const personalBuyCoins = async (data) => {
 	let createBalanceCoins = [];
 
 	for (const coin of coins) {
+		if (!coin.quantity) continue;
+		
 		objectUserBalance[coin.id]
 			? updateBalanceCoins.push({
 				coinId: coin.id,

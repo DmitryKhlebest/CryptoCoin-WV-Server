@@ -10,6 +10,10 @@ const config = {
 		port: 12345,
 		host: 'localhost'
 	},
+	// address: {
+	// 	port: 12345,
+	// 	host: '192.168.43.211'
+	// },
 	db,
 	env,
 	encryptionPassword: {

@@ -5,6 +5,7 @@ const fs = require('fs');
 const User = require('../../model/user');
 const storageSessions = require('../../lib/storage/sessions');
 const { pathDefaultAvatar } = require('../../config');
+const util = require('../../lib/util');
 
 
 const registration = async (data, ws) => {
@@ -16,9 +17,10 @@ const registration = async (data, ws) => {
 	const token = await storageSessions.addSession(user.id);
 
 	ws.token = token;
+	
+	user.avatar = util.getAvatar(pathDefaultAvatar);
 
-	delete user.salt;
-	delete user.hashedPassword;
+	delete user.imagePath;
 
 	return {
 		ok: {

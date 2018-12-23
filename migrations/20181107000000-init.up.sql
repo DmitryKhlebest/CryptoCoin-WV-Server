@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS coin (
 	change_per_week	DOUBLE PRECISION,
 	market_cap		DOUBLE PRECISION,
 	image_url 		TEXT,
-	last_updated	INTEGER
+	last_updated	TIMESTAMP
 );
 
 --__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--__--
@@ -95,16 +95,26 @@ VALUES
 INSERT INTO coin 
 	(id,name,price,change_per_hour,change_per_day,change_per_week,market_cap,image_url,last_updated)
 VALUES
-	('BTC', 'Bitcoin', 4143.25, 0.23, -0.95, 9.47, 72106158992, 'https://www.cryptocompare.com/media/19633/btc.png', 1543754124),
-	('LTC', 'Litecoin', 33.63 , 0.37 , 0.35 , 17.95 , 1997678932 , 'https://www.cryptocompare.com/media/19782/litecoin-logo.png' ,   1543754103),
-	('XRP', 'XRP', 0.37 , 0.59 , -1.35 , 6.82 , 14864054282 , 'https://www.cryptocompare.com/media/34477776/xrp.png' ,   1543754103),
-	('XLM', 'Stellar' , 0.16 , 0.34 , -2.32 , 14.55 ,  3127619945 , 'https://www.cryptocompare.com/media/20696/str.png' ,   1543754105),
-	('USDT', 'Tether' , 1 , 0.23 , -0.01 , 2.04 ,  1853071921 , 'https://www.cryptocompare.com/media/1383672/usdt.png' ,   1543754107),
-	('ETH', 'Ethereum' , 116.92 , 0.25 , -1.24 , 7.89 , 12107758636 , 'https://www.cryptocompare.com/media/20646/eth_logo.png' ,   1543754120),
-	('EOS', 'EOS' , 2.93 , 0.07 , -0.84 , -8.2 ,  2659723337 , 'https://www.cryptocompare.com/media/1383652/eos_1.png' ,   1543754111),
-	('BCH', 'Bitcoin Cash' , 173 , 0.04 , -1.19 , 2.26 ,  3025649504 , 'https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png' , 1543754112),
-	('TRX', 'TRON' , 0.01 , -0.03 , -2.3 , 27.52 , 984187732 , 'https://www.cryptocompare.com/media/34477805/trx.jpg' ,   1543754114),
-	('ADA', 'Cardano' , 0.04 , 0.23 , 0.29 , 17.83 ,  1068162391 , 'https://www.cryptocompare.com/media/12318177/ada.png' ,   1543754115);
+	-- ('BTC', 'Bitcoin', 4143.25, 0.23, -0.95, 9.47, 72106158992, 'https://www.cryptocompare.com/media/19633/btc.png', 1543754124),
+	-- ('LTC', 'Litecoin', 33.63 , 0.37 , 0.35 , 17.95 , 1997678932 , 'https://www.cryptocompare.com/media/19782/litecoin-logo.png' ,   1543754103),
+	-- ('XRP', 'XRP', 0.37 , 0.59 , -1.35 , 6.82 , 14864054282 , 'https://www.cryptocompare.com/media/34477776/xrp.png' ,   1543754103),
+	-- ('XLM', 'Stellar' , 0.16 , 0.34 , -2.32 , 14.55 ,  3127619945 , 'https://www.cryptocompare.com/media/20696/str.png' ,   1543754105),
+	-- ('USDT', 'Tether' , 1 , 0.23 , -0.01 , 2.04 ,  1853071921 , 'https://www.cryptocompare.com/media/1383672/usdt.png' ,   1543754107),
+	-- ('ETH', 'Ethereum' , 116.92 , 0.25 , -1.24 , 7.89 , 12107758636 , 'https://www.cryptocompare.com/media/20646/eth_logo.png' ,   1543754120),
+	-- ('EOS', 'EOS' , 2.93 , 0.07 , -0.84 , -8.2 ,  2659723337 , 'https://www.cryptocompare.com/media/1383652/eos_1.png' ,   1543754111),
+	-- ('BCH', 'Bitcoin Cash' , 173 , 0.04 , -1.19 , 2.26 ,  3025649504 , 'https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png' , 1543754112),
+	-- ('TRX', 'TRON' , 0.01 , -0.03 , -2.3 , 27.52 , 984187732 , 'https://www.cryptocompare.com/media/34477805/trx.jpg' ,   1543754114),
+	-- ('ADA', 'Cardano' , 0.04 , 0.23 , 0.29 , 17.83 ,  1068162391 , 'https://www.cryptocompare.com/media/12318177/ada.png' ,   1543754115);
+	('BTC', 'Bitcoin', 4143.25, 0.23, -0.95, 9.47, 72106158992, 'https://www.cryptocompare.com/media/19633/btc.png', '2018-12-23 00:29:22'),
+	('LTC', 'Litecoin', 33.63 , 0.37 , 0.35 , 17.95 , 1997678932 , 'https://www.cryptocompare.com/media/19782/litecoin-logo.png' ,   '2018-12-23 00:29:23'),
+	('XRP', 'XRP', 0.37 , 0.59 , -1.35 , 6.82 , 14864054282 , 'https://www.cryptocompare.com/media/34477776/xrp.png' ,   '2018-12-23 00:29:24'),
+	('XLM', 'Stellar' , 0.16 , 0.34 , -2.32 , 14.55 ,  3127619945 , 'https://www.cryptocompare.com/media/20696/str.png' ,   '2018-12-23 00:29:25'),
+	('USDT', 'Tether' , 1 , 0.23 , -0.01 , 2.04 ,  1853071921 , 'https://www.cryptocompare.com/media/1383672/usdt.png' ,   '2018-12-23 00:29:26'),
+	('ETH', 'Ethereum' , 116.92 , 0.25 , -1.24 , 7.89 , 12107758636 , 'https://www.cryptocompare.com/media/20646/eth_logo.png' ,   '2018-12-23 00:29:27'),
+	('EOS', 'EOS' , 2.93 , 0.07 , -0.84 , -8.2 ,  2659723337 , 'https://www.cryptocompare.com/media/1383652/eos_1.png' ,   '2018-12-23 00:29:28'),
+	('BCH', 'Bitcoin Cash' , 173 , 0.04 , -1.19 , 2.26 ,  3025649504 , 'https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png' , '2018-12-23 00:29:29'),
+	('TRX', 'TRON' , 0.01 , -0.03 , -2.3 , 27.52 , 984187732 , 'https://www.cryptocompare.com/media/34477805/trx.jpg' ,   '2018-12-23 00:29:30'),
+	('ADA', 'Cardano' , 0.04 , 0.23 , 0.29 , 17.83 ,  1068162391 , 'https://www.cryptocompare.com/media/12318177/ada.png' ,   '2018-12-23 00:29:31');
 
 INSERT INTO balance_coin 
 	(id_user,id_coin,quantity)

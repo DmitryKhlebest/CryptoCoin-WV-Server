@@ -6,11 +6,16 @@ const HistoryPurchase = require('../../model/historyPurchase');
 
 
 const historyUploadInfo = async (data) => {
-    // const { userId } = data;
-    const userId = 1;
+    const { userId } = data;
+    // const userId = 2;
 
     const purchasesTable = await HistoryPurchase.purchasesTable(userId);
     const salesTable = await HistoryPurchase.salesTable(userId);
+
+    // console.log(purchasesTable, salesTable);
+    // console.log(salesTable[0].dateTime);
+    // console.log(salesTable[0].dateTime.toString());
+    // console.log(typeof salesTable[0].dateTime);
 
     return {
         ok: {

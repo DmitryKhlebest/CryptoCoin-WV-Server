@@ -8,8 +8,8 @@ const controller = async (message, ws) => {
     let request;
 
     try {
+        console.log("\nRequest:", message);
         request = JSON.parse(message);
-        console.log("\nRequest:", request);
     } catch (err) {
         console.log('Error: parsing request!', err);
         ws.send(JSON.stringify({
@@ -17,9 +17,9 @@ const controller = async (message, ws) => {
                 message: 'Error: Invalid request!'
             }
         }));
-    }
+    };
 
-    let response = { ruid: request.ruid };
+    let res = { ruid: request.ruid };
 
     try {
         if (!route[request.method])
@@ -34,23 +34,24 @@ const controller = async (message, ws) => {
             const userId = await storageSessions.getUserIdByToken(token);
             if (!userId)
                 throw new Error("Error: session with such a token does not exist (incorrect token, session is completed)!");
-            request.data = userId;
-        }
+            request.data.userId = userId;
+        };
 
-        response.method = method;
-        response.data = await method(request.data, ws);
+        res.method = method;
+        res.data = await method(request.data, ws);
     } catch (err) {
         console.log(err);
-        response.data = {
+        res.data = {
             error: {
                 message: err.message
             }
-        }
-    }
+        };
+    };
 
+    const response = JSON.stringify(res);
     console.log("Response:", response);
 
-    ws.send(JSON.stringify(response));
+    ws.send(response);
 };
 
 

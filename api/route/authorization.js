@@ -2,6 +2,7 @@
 
 const User = require('../../model/user');
 const storageSessions = require('../../lib/storage/sessions');
+const util = require('../../lib/util');
 
 
 const authorization = async (data, ws) => {
@@ -23,8 +24,31 @@ const authorization = async (data, ws) => {
 
 	ws.token = token;
 
+	user.avatar = util.getAvatar(user.imagePath);
+
 	delete user.salt;
 	delete user.hashedPassword;
+	delete user.imagePath;
+
+	// console.log(user);
+	// const imagePath = path.join(__dirname, '..', '..', user.imagePath);
+	// console.log(imagePath);
+	// // /home/kda/Study/CryptoCoin-WV/CryptoCoin-WV-Server/api/route/../../resourse/images/defaultAvatar.png
+	// const imageType = imagePath.match(/[a-z]+$/)[0];
+	// const imageName = imagePath.match(/(\w+).[a-z]+$/)[1];
+	// console.log(imageType);
+	// console.log(imageName);
+
+	// const bitmap = fs.readFileSync(imagePath);
+	// const base64 = new Buffer(bitmap).toString('base64');
+
+	// const image = `data:image/${imageType};base64,${base64}`;
+	// console.log(image);
+
+	// user.avatar = {
+	// 	image,
+	// 	name: imageName
+	// };
 
 	return {
 		ok: {
