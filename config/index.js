@@ -8,7 +8,7 @@ const path = require('path');
 const config = {
 	address: {
 		port: 12345,
-		host: 'localhost'
+		host: '0.0.0.0'
 	},
 	// address: {
 	// 	port: 12345,
@@ -21,9 +21,7 @@ const config = {
 		PERFORMANCE: "hex"
 	},
 	prefixKeySession: "coins:token:",
-	// pathDirectoryUsers: fs.realpathSync(__dirname + '/../resourse/users'),
 	pathDefaultAvatar: 'resourse/images/defaultAvatar.png',
-	// defaultAvatarName: "nameless.png",
 	sessionLifeTime: 1000 * 60 *60 *24
 };
 

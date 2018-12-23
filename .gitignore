@@ -61,5 +61,5 @@ typings/
 .next
 
 # data users
-resourses/*
-!resourses/images
+resourse/*
+!resourse/images
