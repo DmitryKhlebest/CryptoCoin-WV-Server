@@ -8,7 +8,7 @@ const path = require('path');
 const config = {
 	address: {
 		port: 12345,
-		host: 'localhost'
+		host: '0.0.0.0'
 	},
 	db,
 	env,
