@@ -20,15 +20,14 @@ INSERT INTO
 		salt, 
 		hashed_password,
 		email,
+		balance,
 		image_path
 	) 
 VALUES
-	($1, $2, $3, $4, $5) 
+	($1, $2, $3, $4, $5, $6) 
 RETURNING
 	id				AS "id",
 	login			AS "login",
-	salt			AS "salt",
-	hashed_password	AS "hashedPassword",
 	email			AS "email",
 	balance			AS "balance",
 	image_path		AS "imagePath";

@@ -7,9 +7,9 @@ const User = require('../../model/user');
 
 
 const marketBuyCoins = async (data) => {
-	// const { coins, userId } = data; // { id, quantity }
-	const { coins } = data;
-	const userId = 2;
+	const { coins, userId } = data; // { id, quantity }
+	// const { coins } = data;
+	// const userId = 2;
 	const coinIds = coins.map((coin) => coin.id);
 
 	const objectCoins = coins
@@ -31,8 +31,11 @@ const marketBuyCoins = async (data) => {
 
 		saleCoin.quantity = Number((saleCoin.quantity - objectCoins[saleCoin.id]).toFixed(2));
 
-		priceAllCoins += saleCoin.price * objectCoins[saleCoin.id];
-	}
+		const price = saleCoin.price * objectCoins[saleCoin.id];
+		priceAllCoins += (price > 0 && price < 0.01)
+			? 0.01
+			: price;
+	};
 
 	balance = Number((balance - priceAllCoins).toFixed(2));
 	if (balance < 0)
@@ -95,7 +98,7 @@ const marketBuyCoins = async (data) => {
 	}
 	await SaleCoin.updateSaleCoin(updateSaleCoins);
 	await SaleCoin.deleteSaleCoin(deleteSaleCoins);
-	
+
 	// Снять с баланса покупателя сумму покупки
 	await User.updateUserBalance(userId, balance);
 

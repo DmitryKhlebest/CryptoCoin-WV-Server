@@ -6,7 +6,9 @@ const SaleCoin = require('../../model/saleCoin');
 
 const personalSaleCoins = async (data) => {
 	let { coin, userId } = data;
-	userId = 1;
+	// userId = 1;
+	if (!coin.quantity)
+		throw new Error("Error: quantity not found!");
 
 	// получить баланс коинов пользователя -> в объект
 	const userBalance = await BalanceCoin.getBalanceCoins(userId);
@@ -22,12 +24,11 @@ const personalSaleCoins = async (data) => {
 		throw new Error("Error: not enough coins on balance!");
 
 	// Создать массив на обновление баланса коина
-	const updateBalanceCoins = [
-		{
-			id: coin.id,
-			quantity: Number((objectUserBalance[coin.id] - coin.quantity).toFixed(2))
-		}
-	];
+	const updateBalanceCoin = {
+		coinId: coin.id,
+		quantity: Number((objectUserBalance[coin.id] - coin.quantity).toFixed(2))
+	};
+	const updateBalanceCoins = [updateBalanceCoin];
 
 	// Создать объект на создание продажи коина
 	const createSaleCoin = {
@@ -42,7 +43,7 @@ const personalSaleCoins = async (data) => {
 
 	return {
 		ok: {
-			coin: updateBalanceCoins
+			coin: updateBalanceCoin
 		}
 	};
 };

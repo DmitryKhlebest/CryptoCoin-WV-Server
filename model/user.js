@@ -20,10 +20,13 @@ User.registration = async (login, password, email, imagePath) => {
 			[ login ]
 		);
 
+		console.log(rs1.rows);
+
 		if (rs1.rows[0]) throw new Error();
 
 		const salt = util.createSalt();
 		const hashedPassword = util.encryptPassword(password, salt);
+		console.log(salt, hashedPassword);
 
 		const rs2 = await client.query(
 			sqls.user.registration,
@@ -32,9 +35,12 @@ User.registration = async (login, password, email, imagePath) => {
 				salt,
 				hashedPassword,
 				email,
+				1000,
 				imagePath
 			]
 		);
+
+		console.log(rs2.rows);
 
 		return rs2.rows[0];
 	} catch (err) {

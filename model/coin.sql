@@ -38,6 +38,8 @@ SELECT
 	change_per_hour AS "changePerHour",
 	change_per_day AS "changePerDay",
 	change_per_week AS "changePerWeek",
-	market_cap AS "marketCap"
+	market_cap AS "marketCap",
+	image_url AS "imageUrl",
+	last_updated AS "lastUpdated"
 FROM
 	coin;

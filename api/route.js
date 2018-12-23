@@ -20,42 +20,42 @@ route.homeUploadInfo = {
 
 route.personalUploadInfo = {
     method: require('./route/personalUploadInfo'),
-    auth: false
+    auth: true
 };
 
 route.personalUpdateAvatar = {
     method: require('./route/personalUpdateAvatar'),
-    auth: false
+    auth: true
 };
 
 route.personalBuyCoins = {
     method: require('./route/personalBuyCoins'),
-    auth: false
+    auth: true
 };
 
 route.personalSaleCoins = {
     method: require('./route/personalSaleCoins'),
-    auth: false
+    auth: true
 };
 
 route.marketUploadInfo = {
     method: require('./route/marketUploadInfo'),
-    auth: false
+    auth: true
 };
 
 route.marketBuyCoins = {
     method: require('./route/marketBuyCoins'),
-    auth: false
+    auth: true
 };
 
 route.historyUploadInfo = {
     method: require('./route/historyUploadInfo'),
-    auth: false
+    auth: true
 };
 
 route.logout = {
     method: require('./route/logout'),
-    auth: false
+    auth: true
 };
 
 

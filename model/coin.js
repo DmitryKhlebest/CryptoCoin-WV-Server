@@ -48,7 +48,7 @@ Coin.set = async (coins) => {
 	}
 };
 
-Coin.get = async (fields) => {
+Coin.get = async () => {
 	let client;
 	try {
 		client = await pool.connect();

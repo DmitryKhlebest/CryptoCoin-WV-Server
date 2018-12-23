@@ -7,10 +7,10 @@ const fs = require('fs');
 
 const writeAvatarInFs = (userId, imageName, imageBase64_withMetaData) => {
 	const acceptType = ['png', 'jpg', 'jpeg'];
-	const typeFile = imageBase64_withMetaData
-		.match(/^data:(.*?)\/([a-z]+);base64,(.+)$/)[2];
+	const typeFileAndEtc = imageBase64_withMetaData
+		.match(/^data:(.*?)\/([a-z]+);base64,(.+)$/);
 
-	if (!acceptType.includes(typeFile))
+	if (!typeFileAndEtc || !acceptType.includes(typeFileAndEtc[2]))
 		throw Error('Error: incorrect image extension!');
 
 	const imageBase64_withoutMetaData = imageBase64_withMetaData
@@ -21,7 +21,7 @@ const writeAvatarInFs = (userId, imageName, imageBase64_withMetaData) => {
 	const pathAvatars = path.join(__dirname, '..', '..', resourseAvatar);
 	const newAvatarName = userId + '-' + imageName;
 	const pathNewAvatar = path.join(pathAvatars, newAvatarName);
-	const newAvatarPath = path.join(resourseAvatar, newAvatarName); 
+	const newAvatarPath = path.join(resourseAvatar, newAvatarName);
 	const regexp = new RegExp(`^${userId}-`);
 
 	fs.readdirSync(pathAvatars)
@@ -34,7 +34,7 @@ const writeAvatarInFs = (userId, imageName, imageBase64_withMetaData) => {
 	const err = fs.writeFileSync(pathNewAvatar, bitmap, 'base64');
 	if (err)
 		throw new Error("Error: write avatar in fs!");
-	
+
 	return newAvatarPath;
 };
 
@@ -50,7 +50,10 @@ const personalUpdateAvatar = async (data) => {
 
 	return {
 		ok: {
-			avatarPath
+			avatar: {
+				image: imageBase64,
+				name: imageName
+			}
 		}
 	};
 };
