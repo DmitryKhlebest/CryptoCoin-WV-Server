@@ -9,11 +9,25 @@ const personalUploadInfo = async (data) => {
     const coins = await Coin.get();
     const balanceCoin = await BalanceCoin.getBalanceCoins(userId);
 
-	const balanceCoinHash = balanceCoin
-		.reduce((object, coin) => {
-			object[coin.coinId] = coin.quantity;
-			return object;
-		}, {});
+    // array = [
+    //     { 
+    //         id: id1, 
+    //         value: value1 
+    //     }, 
+    //     { 
+    //         id: id2, 
+    //         value: value2
+    //     }
+    // ];
+    // object = {
+    //     id1: value1,
+    //     id2: value2
+    // }
+    const balanceCoinHash = balanceCoin
+        .reduce((object, coin) => {
+            object[coin.coinId] = coin.quantity;
+            return object;
+        }, {});
 
     for (const coin of coins)
         coin.quantity = balanceCoinHash[coin.id] || 0;

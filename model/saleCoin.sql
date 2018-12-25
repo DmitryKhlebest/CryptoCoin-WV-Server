@@ -5,7 +5,7 @@ SELECT
 	us.login		AS "login",
 	sc.id_coin		AS "coinId",
 	co.name			AS "name",
-	co.image_url	AS "imgeUrl",
+	co.image_url	AS "imageUrl",
 	sc.quantity		AS "quantity",
 	sc.price		AS "price"
 FROM

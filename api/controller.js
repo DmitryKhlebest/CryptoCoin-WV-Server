@@ -34,7 +34,7 @@ const controller = async (message, ws) => {
             const userId = await storageSessions.getUserIdByToken(token);
             if (!userId)
                 throw new Error("Error: session with such a token does not exist (incorrect token, session is completed)!");
-            request.data.userId = userId;
+            request.data.userId = Number(userId);
         };
 
         res.method = method;

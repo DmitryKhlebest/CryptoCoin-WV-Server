@@ -10,8 +10,14 @@ const SYSTEM_ADMIN_ID = 1;
 
 const personalBuyCoins = async (data) => {
 	const { coins, userId } = data;
-	// const { coins } = data;
-	// const userId = 2;
+
+	for (const coin of coins)
+		if (!(coin.quantity > 0.01)) 
+			return {
+				error: {
+					message: "Error: minimum transaction size is 0.01 coins!"
+				}
+			};
 
 	const user = await User.getUserById(userId);
 	let balance = user.balance;

@@ -62,7 +62,9 @@ UPDATE
 SET
 	balance = $1
 WHERE 
-	id = $2;
+	id = $2
+RETURNING
+	balance;
 
 --- user.addToBalance
 UPDATE
@@ -70,4 +72,6 @@ UPDATE
 SET
 	balance = balance + $1
 WHERE 
-	id = $2;
+	id = $2
+RETURNING
+	balance;

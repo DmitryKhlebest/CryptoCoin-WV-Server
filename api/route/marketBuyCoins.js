@@ -8,9 +8,15 @@ const User = require('../../model/user');
 
 const marketBuyCoins = async (data) => {
 	const { coins, userId } = data; // { id, quantity }
-	// const { coins } = data;
-	// const userId = 2;
 	const coinIds = coins.map((coin) => coin.id);
+
+	for (const coin of coins)
+		if (!(coin.quantity > 0.01)) 
+			return {
+				error: {
+					message: "Error: minimum transaction size is 0.01 coins!"
+				}
+			};
 
 	const objectCoins = coins
 		.reduce((object, coin) => {
@@ -32,14 +38,21 @@ const marketBuyCoins = async (data) => {
 		saleCoin.quantity = Number((saleCoin.quantity - objectCoins[saleCoin.id]).toFixed(2));
 
 		const price = saleCoin.price * objectCoins[saleCoin.id];
-		priceAllCoins += (price > 0 && price < 0.01)
+		const aroundPrice = (price > 0 && price < 0.01)
 			? 0.01
 			: price;
+
+		if (userId !== saleCoin.userId)
+			priceAllCoins += aroundPrice;
+		else
+			priceAllCoins -= aroundPrice;
 	};
 
+	console.log("Before balance:", balance);
 	balance = Number((balance - priceAllCoins).toFixed(2));
 	if (balance < 0)
 		throw new Error("Error: insufficient funds!");
+	console.log("After balance:", balance);
 
 	// Записать на баланс покупателя новые коины
 	const userBalanceCoins = await BalanceCoin.getBalanceCoins(userId);
@@ -63,8 +76,6 @@ const marketBuyCoins = async (data) => {
 				quantity: Number(objectCoins[saleCoin.id].toFixed(2))
 			});
 
-	const newBalanceCoins = updateBalanceCoins.concat(createBalanceCoins);
-
 	// Обновить баланс коинов покупателя
 	await BalanceCoin.updateBalanceCoin(userId, updateBalanceCoins);
 	await BalanceCoin.createBalanceCoin(userId, createBalanceCoins);
@@ -73,6 +84,8 @@ const marketBuyCoins = async (data) => {
 	//  если их число стало равно 0, то удалить запись продажи
 	let updateSaleCoins = [];
 	let deleteSaleCoins = [];
+
+	console.log(saleCoins);
 
 	for (const saleCoin of saleCoins) {
 		saleCoin.quantity
@@ -100,12 +113,16 @@ const marketBuyCoins = async (data) => {
 	await SaleCoin.deleteSaleCoin(deleteSaleCoins);
 
 	// Снять с баланса покупателя сумму покупки
-	await User.updateUserBalance(userId, balance);
+	const newUserBalance = await User.updateUserBalance(userId, balance);
+	console.log("newUserBalance:", newUserBalance);
 
 	return {
 		ok: {
 			balance,
-			coins: newBalanceCoins
+			coins: saleCoins
+				.map((saleCoin) =>
+					({ id: saleCoin.id, quantity: saleCoin.quantity })
+				)
 		}
 	};
 };
